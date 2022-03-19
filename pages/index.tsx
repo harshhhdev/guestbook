@@ -15,14 +15,17 @@ const Home: NextPage<{ posts: PostWithUser[] }> = ({ posts }) => {
         <SEO />
         <Header />
         <Form />
-        <Posts posts={posts} />
+        <Posts fallback={posts} />
       </div>
     </div>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const posts = await prisma.post.findMany({ include: { user: true } })
+  const posts = await prisma.post.findMany({
+    include: { user: true },
+    orderBy: { createdAt: 'desc' },
+  })
 
   return {
     props: {

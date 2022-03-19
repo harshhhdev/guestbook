@@ -24,7 +24,6 @@ h3 {
 
 button {
   user-select: none;
-  outline: none;
   cursor: pointer;
   @apply font-sans;
 }

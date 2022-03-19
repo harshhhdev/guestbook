@@ -1,12 +1,16 @@
-import { FC, FormEvent, useRef } from 'react'
+import { FC, FormEvent, useRef, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import dompurify from 'dompurify'
+import { useSWRConfig } from 'swr'
 
 const Form: FC = () => {
   const { data: session, status } = useSession()
+  const { mutate } = useSWRConfig()
   const content = useRef<HTMLTextAreaElement>(null)
+  const [visible, setVisible] = useState(false)
+  const [error, setError] = useState(false)
 
-  const createPost = (e: FormEvent<HTMLFormElement>) => {
+  const createPost = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const headers = new Headers()
@@ -22,10 +26,16 @@ const Form: FC = () => {
       body: raw,
     }
 
-    fetch('/api/new', requestOptions)
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log('error', error))
+    try {
+      await fetch('/api/new', requestOptions)
+
+      setVisible(true)
+      content!.current!.value = ''
+      mutate('/api/posts')
+    } catch (err) {
+      setError(true)
+      console.error(err)
+    }
   }
 
   return (
@@ -38,13 +48,21 @@ const Form: FC = () => {
             ref={content}
             className='w-full mt-8 bg-gray-800 rounded-md border-gray-700 border-2 p-5 resize-y font-sans text-base text-white box-border'
           />
+          {visible && (
+            <p className='text-green-400'>
+              🎉 Thanks for signing the guestbook!
+            </p>
+          )}
+          {error && (
+            <p className='text-rose-400'>😅 An error occured, try again!</p>
+          )}
           <p className='my-8'>
             Keep it family friendly, don&apos;t be a doofus. The only
             information displayed on this site will be the name on your account,
             and when you create this post.
           </p>
           <button
-            className='text-gray-900 bg-white px-8 py-3 text-lg rounded border-2 border-solid border-white hover:bg-gray-900 hover:text-white duration-200 focus:ring-3'
+            className='text-gray-900 bg-white px-8 py-3 text-lg rounded border-2 border-solid border-white hover:bg-gray-900 hover:text-white duration-200'
             type='submit'
           >
             Sign
