@@ -6,7 +6,6 @@ import { PostWithUser } from '@typings/index'
 
 const Posts: FC<{ fallback: PostWithUser[] }> = ({ fallback }) => {
   const { data: posts } = useSWR('/api/posts', fetcher, { fallback })
-  console.log(posts)
 
   return (
     <div className='mb-32'>
