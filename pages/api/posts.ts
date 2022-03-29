@@ -11,7 +11,7 @@ const fetchPosts = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(200).json(
       posts.map((post) => ({
         id: post.id,
-        created: post.createdAt,
+        createdAt: post.createdAt,
         content: post.content,
         user: post.user,
       }))

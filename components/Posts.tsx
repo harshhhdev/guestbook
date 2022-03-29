@@ -1,11 +1,12 @@
 import { FC } from 'react'
-import { format } from 'timeago.js'
+import { format } from 'date-fns'
 import useSWR from 'swr'
 import fetcher from '@lib/fetcher'
 import { PostWithUser } from '@typings/index'
 
 const Posts: FC<{ fallback: PostWithUser[] }> = ({ fallback }) => {
   const { data: posts } = useSWR('/api/posts', fetcher, { fallback })
+  console.log(posts)
 
   return (
     <div className='mb-32'>
@@ -13,7 +14,7 @@ const Posts: FC<{ fallback: PostWithUser[] }> = ({ fallback }) => {
         <div key={index}>
           <h3>{post.content}</h3>
           <p>
-            Written by {post.user.name} · Posted at{' '}
+            Written by {post.user.name} · Posted on{' '}
             {format(new Date(post.createdAt), "d MMM yyyy 'at' h:mm bb")}
           </p>
         </div>
