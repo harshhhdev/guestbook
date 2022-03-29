@@ -15,7 +15,7 @@ const Home: NextPage<{ posts: PostWithUser[] }> = ({ posts }) => {
         <SEO />
         <Header />
         <Form />
-        <Posts fallback={posts} />
+        <Posts posts={posts} />
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Prisma } from "@prisma/client"
 
 const postWithUser = Prisma.validator<Prisma.PostArgs>()({
   include: { user: true },
