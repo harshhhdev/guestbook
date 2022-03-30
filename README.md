@@ -1,8 +1,6 @@
 # Harsh's Guestbook
 
-📂 Project files for a talk about migrating a live [PostgreSQL](https://www.postgresql.org/) database into [CockroachDB serverless](https://www.cockroachlabs.com/serverless)
-
-Check out the [video](https://www.youtube.com/channel/UC6ix6gYRC62pM0sMRYKPKUQ)!
+📂 Project files for a blog post about [Building a Serverless Application with Next.js and CockroachDB!](https://dev.to/harshhhdev/building-a-serverless-application-with-nextjs-and-cockroachdb-3pm5) 
 
 # 🚀 Quickstart
 
@@ -26,8 +24,6 @@ Rename `.env.local.EXAMPLE` to `.env.local`
 Now, go to [CockroachDB], and create a new cluster. Create a user, and hit "connect", navigate over to connection string follow the instructions.
 
 Next, run `yarn generate && yarn migrate:dev` to pull your schema from your `prisma/schema.prisma` file into [CockroachDB].
-
-For a more in-depth explaination, be sure to checkout the [video](https://www.youtube.com/channel/UC6ix6gYRC62pM0sMRYKPKUQ).
 
 ## Starting server
 
