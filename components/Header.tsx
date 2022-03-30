@@ -18,7 +18,7 @@ const Header: FC = () => {
           @leerob&apos;s guestbook
         </a>{' '}
         using{' '}
-        <a href='https://youtube.com' className='underline'>
+        <a href='https://dev.to/harshhhdev/building-a-serverless-application-with-nextjs-and-cockroachdb-3pm5' className='underline'>
           serverless technologies
         </a>
         . Leave a comment below, it can be totally random 👇
